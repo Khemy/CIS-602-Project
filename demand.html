@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <title>Total Energy Consumption in the US</title>
+    <title>Demand fo refinrd petroleum</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -20,7 +20,7 @@
     </style>
   </head>
   <body>
-    <h2 style="padding-left:60px;">Total US Energy Consumption by Sector(Quadrillion Btu)</h2>
+    <h2 style="padding-left:60px;">Domestic Demand for Refined Petroleum Products by Sector(Quadrillion Btu)</h2>
     <script>
         var margin = {top: 20, right: 55, bottom: 30, left: 60},
           width  = 960 - margin.left - margin.right,
@@ -54,13 +54,13 @@
         .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      d3.csv("table041.csv", function (error, data) {
+      d3.csv("demand.csv", function (error, data) {
         console.log("Initial Data", data);
 
         var labelVar = 'Year';
         var varNames = d3.keys(data[0]).filter(function (key) { return key !== labelVar;});
 
-        color.domain(varNames);
+        //color.domain(varNames);
 
         var seriesData = varNames.map(function (name) {
           return {
@@ -110,7 +110,7 @@
           .style("stroke-width", "4px")
           .style("fill", "none")
 
-        series.selectAll(".point")
+        series.selectAll(".bar")
           .data(function (d) { return d.values; })
           .enter().append("circle")
            .attr("class", "point")
@@ -166,7 +166,8 @@
 
     </script>
     <h4> Key: Btu = British thermal unit</h4>
-    <h4><p>The data for Residential, Commercial, and Industrial sectors include only fossil fuels consumed directly. Most renewable fuels are not included. The data for the Transportation sector includes only fossil and renewable fuels consumed directly. The data for Electric utilities includes all fuels (fossil, nuclear, geothermal, hydro, and other renewables) used by electric utilities. Due to a lack of consistent historical data, some renewable energy resources are not included in this table. The totals in table 4-4 are the best numbers for total U.S. energy consumption from all sources.                     
+    <h4><p>Transportation's share of U.S. petroleum demand in this table differs slightly from table 4-1 because this table takes into account differences within sectors in the use of various grades of petroleum-based fuel that have a different Btu content per unit volume. 
+The sum of components may not add to totals due to rounding.                   
 </p></h4>
-<a href="imp_exp.html">Back</a>|<a href="demand.html">Next</a>
+<a href="EnergyConsumption.html">Back</a>|<a href="COEmissions.html">Next</a>
     </body>
